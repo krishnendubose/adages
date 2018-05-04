@@ -1,0 +1,3 @@
+http://localhost:8080/adages/resourcesA/json -- json
+http://localhost:8080/adages/resourcesA/ -- xml
+http://localhost:8080/adages/resourcesA/plain -- plain text
