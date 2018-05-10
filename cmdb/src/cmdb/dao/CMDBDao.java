@@ -6,7 +6,8 @@ import cmdb.bean.CMDBList;
 public interface CMDBDao {
 	String insertDeploymentDetails(CMDB cmdb);
 	String updateDeploymentDetails(int id , String artifactName, String artifactVersion, String deploymentStatus);
-	String deleteDeploymentDetails(CMDB cmdb);
+	String deleteDeploymentDetails(int id);
 	CMDB getDeploymentDetails(int id);
 	CMDBList getAllDeploymentDetails();
+	boolean populateDataFromFile(String cmdbBulkDataFile);
 }
