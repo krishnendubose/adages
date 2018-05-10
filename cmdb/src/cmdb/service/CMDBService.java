@@ -9,7 +9,7 @@ public class CMDBService {
 
 	CMDBDao cmdbBDao;
 	static CMDBService cmdbService;
-	String cmdbBulkDataFile="C:\\Users\\isapkbo\\Desktop\\Workspace\\Test\\src\\cmdb\\resources\\cmdb_bulk_data.db.csv";
+	String cmdbBulkDataFile="\\src\\cmdb\\resources\\cmdb_bulk_data.db.csv";
 	
 	private CMDBService(){
 		cmdbBDao = new CMDBDaoImpl();
