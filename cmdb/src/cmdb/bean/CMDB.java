@@ -1,21 +1,20 @@
 package cmdb.bean;
 
 import java.io.Serializable;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class CMDB implements Serializable {
-	
-	public AtomicInteger id;
+
+	public int id;
 	public String artifactName;
 	public String artifactVersion;
 	public String deployedBy;
 	public String deploymentDate;
-    public String deploymentStatus;
-    
-	public AtomicInteger getId() {
+	public String deploymentStatus;
+
+	public int getId() {
 		return id;
 	}
-	public void setId(AtomicInteger id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getArtifactName() {
@@ -47,5 +46,20 @@ public class CMDB implements Serializable {
 	}
 	public void setDeploymentStatus(String deploymentStatus) {
 		this.deploymentStatus = deploymentStatus;
+	}
+
+	public String toString(){
+
+		return "Id:-"+this.id+", artifactName:-"+this.artifactName+", artifactVersion:-"+this.artifactVersion+
+				", deployedBy:-"+this.deployedBy+
+				", deploymentDate:-"+this.deploymentDate+
+				", deploymentStatus:-"+this.deploymentStatus;
+	}
+
+	public boolean equals(CMDB cmdb){
+		if (this.id == cmdb.getId() )
+			return true;
+		else
+			return false;		
 	}
 }
