@@ -1,6 +1,8 @@
 package cmdb.dao;
 
+import java.beans.XMLEncoder;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -38,7 +40,7 @@ public class CMDBDaoImpl implements CMDBDao {
 
 		return deleteInfo;
 	}
-	public CMDB getDeploymentDetails(int id){
+	public String getDeploymentDetails(int id){
 		CMDB cmdb = null;
 		for (CMDB data: cmdbList.getCmdbList()){
 			if ( id == data.getId()){
@@ -46,11 +48,11 @@ public class CMDBDaoImpl implements CMDBDao {
 				break;
 			}
 		}
-		return cmdb;
+		return this.toXML(cmdb);
 
 	}
-	public CMDBList getAllDeploymentDetails(){
-		return cmdbList;
+	public String getAllDeploymentDetails(){
+		return this.toXML(cmdbList.getCmdbList().toArray());
 
 	}
 
@@ -97,4 +99,22 @@ public class CMDBDaoImpl implements CMDBDao {
 		return false;
 
 	}
+	
+	public String toXML(Object obj){
+		String xml=null;
+		try{
+			
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			XMLEncoder encoder=new XMLEncoder(out);
+			encoder.writeObject(obj);
+			encoder.close();
+			xml=out.toString();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		return xml;
+		
+	}
+	
 }

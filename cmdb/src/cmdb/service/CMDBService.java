@@ -36,11 +36,11 @@ public class CMDBService {
 		return cmdbBDao.deleteDeploymentDetails(id);
 
 	}
-	public CMDB getDeploymentDetails(int id){
+	public String getDeploymentDetails(int id){
 		return cmdbBDao.getDeploymentDetails(id);
 
 	}
-	public CMDBList getAllDeploymentDetails(){
+	public String getAllDeploymentDetails(){
 		return cmdbBDao.getAllDeploymentDetails();
 
 	}
