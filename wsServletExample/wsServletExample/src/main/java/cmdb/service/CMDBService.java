@@ -1,20 +1,29 @@
 package cmdb.service;
 
+
 import cmdb.bean.CMDB;
-import cmdb.bean.CMDBList;
 import cmdb.dao.CMDBDao;
 import cmdb.dao.CMDBDaoImpl;
+import javax.servlet.ServletContext;
 
 public class CMDBService {
 
-	CMDBDao cmdbBDao;
+	private CMDBDao cmdbBDao;
+	private ServletContext sctx;
 	static CMDBService cmdbService;
-	String cmdbBulkDataFile="/home/krishnendu/Documents/Development/projects/adages/cmdb/src/cmdb/resources/cmdb_bulk_data.db.csv";
-	//String cmdbBulkDataFile="/././resources/cmdb_bulk_data.db.csv";
-	
-	private CMDBService(){
+	String cmdbBulkDataFile="/WEB-INF/data/cmdb_bulk_data.db.csv";
+
+
+	public CMDBService(){
 		cmdbBDao = new CMDBDaoImpl();
-		cmdbBDao.populateDataFromFile(cmdbBulkDataFile);
+
+	}
+
+	public boolean populateDataFromFile(){
+		if (cmdbBDao.getCmdbList().getCmdbList() == null ||  cmdbBDao.getCmdbList().getCmdbList().isEmpty())
+			return cmdbBDao.populateDataFromFile(cmdbBulkDataFile, this.sctx);
+		else 
+			return false;
 	}
 
 	public static CMDBService getCMDBService(){
@@ -24,8 +33,16 @@ public class CMDBService {
 		return cmdbService;
 
 	}
+	public static CMDBService getCMDBService(ServletContext sctx){
+		if ( null == cmdbService ){
+			cmdbService = new CMDBService();
+		}
+		return cmdbService;
+
+	}
 
 	public String insertDeploymentDetails(CMDB cmdb){
+
 		return cmdbBDao.insertDeploymentDetails(cmdb);
 
 	}
@@ -44,5 +61,12 @@ public class CMDBService {
 	public String getAllDeploymentDetails(){
 		return cmdbBDao.getAllDeploymentDetails();
 
+	}
+	public ServletContext getSctx() {
+		return sctx;
+	}
+
+	public void setSctx(ServletContext sctx) {
+		this.sctx = sctx;
 	}
 }
