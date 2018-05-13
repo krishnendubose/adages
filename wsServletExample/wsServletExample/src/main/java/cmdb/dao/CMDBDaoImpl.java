@@ -52,7 +52,7 @@ public class CMDBDaoImpl implements CMDBDao {
 
 		return deleteInfo;
 	}
-	public String getDeploymentDetails(int id){
+	public CMDB getDeploymentDetails(int id){
 		CMDB cmdb = null;
 		for (CMDB data: cmdbList.getCmdbList()){
 			if ( id == data.getId()){
@@ -60,12 +60,11 @@ public class CMDBDaoImpl implements CMDBDao {
 				break;
 			}
 		}
-		return this.toXML(cmdb);
+		return cmdb;
 
 	}
-	public String getAllDeploymentDetails(){
-		System.out.println(this.toXML(cmdbList.getCmdbList().toArray()));
-		return this.toXML(cmdbList.getCmdbList().toArray());
+	public CMDBList getAllDeploymentDetails(){
+		return cmdbList;
 
 	}
 
@@ -114,21 +113,5 @@ public class CMDBDaoImpl implements CMDBDao {
 
 	}
 
-	public String toXML(Object obj){
-		String xml=null;
-		try{
-
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			XMLEncoder encoder=new XMLEncoder(out);
-			encoder.writeObject(obj);
-			encoder.close();
-			xml=out.toString();
-		}catch(Exception e){
-			e.printStackTrace();
-
-		}
-		return xml;
-
-	}
 
 }

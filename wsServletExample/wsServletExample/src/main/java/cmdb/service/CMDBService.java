@@ -4,6 +4,10 @@ package cmdb.service;
 import cmdb.bean.CMDB;
 import cmdb.dao.CMDBDao;
 import cmdb.dao.CMDBDaoImpl;
+
+import java.beans.XMLEncoder;
+import java.io.ByteArrayOutputStream;
+
 import javax.servlet.ServletContext;
 
 public class CMDBService {
@@ -55,11 +59,11 @@ public class CMDBService {
 
 	}
 	public String getDeploymentDetails(int id){
-		return cmdbBDao.getDeploymentDetails(id);
+		return this.toXML(cmdbBDao.getDeploymentDetails(id));
 
 	}
 	public String getAllDeploymentDetails(){
-		return cmdbBDao.getAllDeploymentDetails();
+		return this.toXML(cmdbBDao.getAllDeploymentDetails());
 
 	}
 	public ServletContext getSctx() {
@@ -68,5 +72,21 @@ public class CMDBService {
 
 	public void setSctx(ServletContext sctx) {
 		this.sctx = sctx;
+	}
+	public String toXML(Object obj){
+		String xml=null;
+		try{
+
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			XMLEncoder encoder=new XMLEncoder(out);
+			encoder.writeObject(obj);
+			encoder.close();
+			xml=out.toString();
+		}catch(Exception e){
+			e.printStackTrace();
+
+		}
+		return xml;
+
 	}
 }
