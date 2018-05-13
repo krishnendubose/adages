@@ -59,7 +59,14 @@ public class CMDBService {
 
 	}
 	public String getDeploymentDetails(int id){
-		return this.toXML(cmdbBDao.getDeploymentDetails(id));
+		String noDataFoundText="Error: Data not present for id = " + id;
+		CMDB cmdb = cmdbBDao.getDeploymentDetails(id);
+		if ( cmdb == null ){
+			return this.toXML(noDataFoundText);
+		}
+		else{
+			return this.toXML(cmdb);
+		}
 
 	}
 	public String getAllDeploymentDetails(){
