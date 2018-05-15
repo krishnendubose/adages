@@ -1,1 +1,1 @@
-http://localhost:8080/wsServletExample/ws -- To access the JSP resorce working as service
+http://localhost:8080/wsServletExample/jsp -- To access the JSP resorce working as service

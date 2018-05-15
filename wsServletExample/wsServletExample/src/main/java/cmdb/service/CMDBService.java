@@ -4,6 +4,7 @@ package cmdb.service;
 import cmdb.bean.CMDB;
 import cmdb.dao.CMDBDao;
 import cmdb.dao.CMDBDaoImpl;
+import cmdb.util.ConvertData;
 
 import java.beans.XMLEncoder;
 import java.io.ByteArrayOutputStream;
@@ -62,15 +63,15 @@ public class CMDBService {
 		String noDataFoundText="Error: Data not present for id = " + id;
 		CMDB cmdb = cmdbBDao.getDeploymentDetails(id);
 		if ( cmdb == null ){
-			return this.toXML(noDataFoundText);
+			return ConvertData.toXML(noDataFoundText);
 		}
 		else{
-			return this.toXML(cmdb);
+			return ConvertData.toXML(cmdb);
 		}
 
 	}
 	public String getAllDeploymentDetails(){
-		return this.toXML(cmdbBDao.getAllDeploymentDetails());
+		return ConvertData.toJSON(ConvertData.toXML(cmdbBDao.getAllDeploymentDetails()));
 
 	}
 	public ServletContext getSctx() {
@@ -80,20 +81,5 @@ public class CMDBService {
 	public void setSctx(ServletContext sctx) {
 		this.sctx = sctx;
 	}
-	public String toXML(Object obj){
-		String xml=null;
-		try{
-
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			XMLEncoder encoder=new XMLEncoder(out);
-			encoder.writeObject(obj);
-			encoder.close();
-			xml=out.toString();
-		}catch(Exception e){
-			e.printStackTrace();
-
-		}
-		return xml;
-
-	}
+	
 }
