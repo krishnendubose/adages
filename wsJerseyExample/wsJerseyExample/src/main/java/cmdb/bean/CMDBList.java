@@ -18,7 +18,7 @@ public class CMDBList implements Serializable {
 	}
     
 	@XmlElement
-	@XmlElementWrapper(name="cmdbs")
+	@XmlElementWrapper(name="cmdbList")
 	public List<CMDB> getCmdbList() {
 		return cmdbList;
 	}
