@@ -1,11 +1,12 @@
 package cmdb.dao;
 
-import java.beans.XMLEncoder;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import javax.servlet.ServletContext;
 
 import cmdb.bean.CMDB;
 import cmdb.bean.CMDBList;
@@ -40,7 +41,7 @@ public class CMDBDaoImpl implements CMDBDao {
 
 		return deleteInfo;
 	}
-	public String getDeploymentDetails(int id){
+	public CMDB getDeploymentDetails(int id){
 		CMDB cmdb = null;
 		for (CMDB data: cmdbList.getCmdbList()){
 			if ( id == data.getId()){
@@ -48,23 +49,24 @@ public class CMDBDaoImpl implements CMDBDao {
 				break;
 			}
 		}
-		return this.toXML(cmdb);
+		return cmdb;
 
 	}
-	public String getAllDeploymentDetails(){
-		return this.toXML(cmdbList.getCmdbList().toArray());
+	public CMDBList getAllDeploymentDetails(){
+		return cmdbList;
 
 	}
 
-	public boolean populateDataFromFile(String cmdbBulkDataFile){		
+	public boolean populateDataFromFile(String cmdbBulkDataFile, ServletContext sctx){		
 
 		BufferedReader br = null;
+		InputStream is = sctx.getResourceAsStream(cmdbBulkDataFile);
 		String line = "";
 		String cvsSplitBy = ",";
 
 		try {
-
-			br = new BufferedReader(new FileReader(cmdbBulkDataFile));
+			InputStreamReader isr = new InputStreamReader(is);
+			br = new BufferedReader(isr);
 			while ((line = br.readLine()) != null) {
 				// use comma as separator
 				String[] dataArr = line.split(cvsSplitBy);       
@@ -100,21 +102,5 @@ public class CMDBDaoImpl implements CMDBDao {
 
 	}
 	
-	public String toXML(Object obj){
-		String xml=null;
-		try{
-			
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			XMLEncoder encoder=new XMLEncoder(out);
-			encoder.writeObject(obj);
-			encoder.close();
-			xml=out.toString();
-		}catch(Exception e){
-			e.printStackTrace();
-			
-		}
-		return xml;
 		
-	}
-	
 }

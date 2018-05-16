@@ -1,7 +1,9 @@
 package cmdb.bean;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name="cmdb")
 public class CMDB implements Serializable {
 
 	public int id;
@@ -47,7 +49,8 @@ public class CMDB implements Serializable {
 	public void setDeploymentStatus(String deploymentStatus) {
 		this.deploymentStatus = deploymentStatus;
 	}
-
+    
+	@Override
 	public String toString(){
 
 		return "Id:-"+this.id+", artifactName:-"+this.artifactName+", artifactVersion:-"+this.artifactVersion+
