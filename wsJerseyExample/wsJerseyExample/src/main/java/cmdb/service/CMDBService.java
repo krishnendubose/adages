@@ -1,23 +1,29 @@
 package cmdb.service;
 
 import javax.servlet.ServletContext;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.inject.Singleton;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 
 import cmdb.bean.CMDB;
-import cmdb.bean.CMDBList;
+import cmdb.converter.Converter;
 import cmdb.dao.CMDBDao;
 import cmdb.dao.CMDBDaoImpl;
 
 @Path("/")
+@Singleton
 public class CMDBService {
 
 	static CMDBDao cmdbBDao;
 
 	@Context
 	private ServletContext sctx;
+	
 	String cmdbBulkDataFile="/WEB-INF/data/cmdb_bulk_data.db.csv";
-
 
 	public CMDBService(){
 		
@@ -49,14 +55,23 @@ public class CMDBService {
 		return cmdbBDao.deleteDeploymentDetails(id);
 
 	}
-	public String getDeploymentDetails(int id){
+	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/json/{id: \\d+}")
+	public String getDeploymentDetails(@PathParam("id") int id){
 		populateDataFromFile();
-		return cmdbBDao.getDeploymentDetails(id);
+		return Converter.toJson(cmdbBDao.getDeploymentDetails(id));
 
 	}
+	
+	
+	 @GET
+	 @Produces({MediaType.APPLICATION_JSON})
+	 @Path("/json")
 	public String getAllDeploymentDetails(){
 		populateDataFromFile();
-		return cmdbBDao.getAllDeploymentDetails();
+		return Converter.toJson(cmdbBDao.getAllDeploymentDetails());
 
 	}
 }
