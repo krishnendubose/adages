@@ -17,31 +17,8 @@ public class CMDBDaoImpl implements CMDBDao {
 	public CMDBDaoImpl(){
 		cmdbList=new CMDBList();			
 	}
-	public String insertDeploymentDetails(CMDB cmdb){
-		if (true == cmdbList.getCmdbList().add(cmdb) )
 
-			return "Added successfully cmdb= " + cmdb;
-		else 
-			return "Unable to add cmdb= " + cmdb;
-	}
-	public String updateDeploymentDetails(int id , String artifactName, String artifactVersion, String deploymentStatus){
-		return "";
-
-	}
-	public String deleteDeploymentDetails(int id){
-
-		String deleteInfo = "Unable to delete as data not found for id = " + id;
-		for (CMDB data: cmdbList.getCmdbList()){
-			if ( id == data.getId()){
-				cmdbList.getCmdbList().remove(data);
-				deleteInfo = "Deleted data for id = " + id;
-				break;
-			}
-		}
-
-		return deleteInfo;
-	}
-	public CMDB getDeploymentDetails(int id){
+	private CMDB getCMDBByID(int id){
 		CMDB cmdb = null;
 		for (CMDB data: cmdbList.getCmdbList()){
 			if ( id == data.getId()){
@@ -50,6 +27,44 @@ public class CMDBDaoImpl implements CMDBDao {
 			}
 		}
 		return cmdb;
+	}
+
+	public String insertDeploymentDetails(CMDB cmdb){
+		if (true == cmdbList.getCmdbList().add(cmdb) )
+
+			return "Added successfully cmdb= " + cmdb;
+		else 
+			return "Unable to add cmdb= " + cmdb;
+	}
+
+	public String updateDeploymentDetails(int id , String artifactName, String artifactVersion, 
+			String deployedBy, String deploymentDate,  String deploymentStatus){
+		String updateInfo = "Unable to update as data not found for id = " + id;
+		CMDB cmdb = getCMDBByID(id);
+		if ( null != cmdb ){
+			cmdb.setArtifactName(artifactName);
+			cmdb.setArtifactVersion(artifactVersion);
+			cmdb.setDeployedBy(deployedBy);
+			cmdb.setDeploymentDate(deploymentDate);
+			cmdb.setDeploymentStatus(deploymentStatus);
+		}
+		return updateInfo;
+
+	}
+
+	public String deleteDeploymentDetails(int id){
+
+		String deleteInfo = "Unable to delete as data not found for id = " + id;
+		CMDB cmdb = getCMDBByID(id);
+		if ( null != cmdb ){
+			cmdbList.getCmdbList().remove(cmdb);
+			deleteInfo = "Deleted data for id = " + id;				
+		}
+		return deleteInfo;
+	}
+
+	public CMDB getDeploymentDetails(int id){
+		return getCMDBByID(id);
 
 	}
 	public CMDBList getAllDeploymentDetails(){
@@ -79,9 +94,7 @@ public class CMDBDaoImpl implements CMDBDao {
 					cmdbData.setDeploymentDate(dataArr[4]);
 					cmdbData.setDeploymentStatus(dataArr[5]);
 					cmdbList.getCmdbList().add(cmdbData);
-
 				}
-
 			}
 
 		} catch (FileNotFoundException e) {
@@ -101,6 +114,5 @@ public class CMDBDaoImpl implements CMDBDao {
 		return false;
 
 	}
-	
-		
+
 }
