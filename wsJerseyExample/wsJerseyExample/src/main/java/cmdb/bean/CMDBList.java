@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="cmdbList")
+@XmlRootElement(name = "cmdbList")
 public class CMDBList implements Serializable {
 
 	public List<CMDB> cmdbList;
@@ -17,8 +17,8 @@ public class CMDBList implements Serializable {
 		cmdbList = new ArrayList<CMDB>();
 	}
     
-	@XmlElement
-	@XmlElementWrapper(name="cmdbList")
+    @XmlElement
+    @XmlElementWrapper(name = "cmdbs")
 	public List<CMDB> getCmdbList() {
 		return cmdbList;
 	}
@@ -26,7 +26,6 @@ public class CMDBList implements Serializable {
 	public void setCmdbList(List<CMDB> cmdbList) {
 		this.cmdbList = cmdbList;
 	}
-	
 	@Override
 	public String toString(){
 
