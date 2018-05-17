@@ -1,7 +1,11 @@
 package cmdb.service;
 
 import javax.servlet.ServletContext;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -39,26 +43,41 @@ public class CMDBService {
 		else 
 			return false;
 	}
-
-	public String insertDeploymentDetails(CMDB cmdb){
+    
+	@POST
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/deployments")
+	public String insertDeploymentDetails(@FormParam("id") int id , @FormParam("artifactName") String artifactName, @FormParam("artifactVersion") String artifactVersion, 
+			@FormParam("deployedBy") String deployedBy, @FormParam("deploymentDate") String deploymentDate,  @FormParam("deploymentStatus") String deploymentStatus){
 		populateDataFromFile();
-		return cmdbBDao.insertDeploymentDetails(cmdb);
+		return cmdbBDao.insertDeploymentDetails(createCMDB(id , artifactName, artifactVersion, 
+				deployedBy, deploymentDate,  deploymentStatus));
 
 	}
-	public String updateDeploymentDetails(int id , String artifactName, String artifactVersion, String deploymentStatus){
+	
+	@PUT
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/deployments")
+	public String updateDeploymentDetails(@FormParam("id") int id , @FormParam("artifactName") String artifactName, @FormParam("artifactVersion") String artifactVersion, 
+			@FormParam("deployedBy") String deployedBy, @FormParam("deploymentDate") String deploymentDate,  @FormParam("deploymentStatus") String deploymentStatus){
 		populateDataFromFile();
-		return cmdbBDao.updateDeploymentDetails(id, artifactName, artifactVersion, deploymentStatus);
+		return cmdbBDao.updateDeploymentDetails(id , artifactName, artifactVersion, 
+				deployedBy, deploymentDate,  deploymentStatus);
 
 	}
+	
+	@DELETE
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/deployments/{id: \\d+}")
 	public String deleteDeploymentDetails(int id){
 		populateDataFromFile();
-		return cmdbBDao.deleteDeploymentDetails(id);
+		return Converter.toJson(cmdbBDao.deleteDeploymentDetails(id));
 
 	}
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
-	@Path("/json/{id: \\d+}")
+	@Path("/deployments/{id: \\d+}")
 	public String getDeploymentDetails(@PathParam("id") int id){
 		populateDataFromFile();
 		return Converter.toJson(cmdbBDao.getDeploymentDetails(id));
@@ -68,10 +87,23 @@ public class CMDBService {
 	
 	 @GET
 	 @Produces({MediaType.APPLICATION_JSON})
-	 @Path("/json")
+	 @Path("/deployments")
 	public String getAllDeploymentDetails(){
 		populateDataFromFile();
 		return Converter.toJson(cmdbBDao.getAllDeploymentDetails());
 
 	}
+	 
+	private CMDB createCMDB(int id , String artifactName, String artifactVersion, 
+			String deployedBy, String deploymentDate,  String deploymentStatus){
+		
+		CMDB cmdb = new CMDB();
+		cmdb.setArtifactName(artifactName);
+		cmdb.setArtifactVersion(artifactVersion);
+		cmdb.setDeployedBy(deployedBy);
+		cmdb.setDeploymentDate(deploymentDate);
+		cmdb.setDeploymentStatus(deploymentStatus);
+		cmdb.setId(id);
+		return cmdb;
+	} 
 }
