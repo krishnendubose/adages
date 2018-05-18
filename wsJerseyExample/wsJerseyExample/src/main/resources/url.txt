@@ -1,0 +1,2 @@
+http://localhost:8080/wsJerseyExample/resourcesCMDB_v1/deployments
+http://localhost:8080/wsJerseyExample/resourcesCMDB_v1/application.wadl --> wadl link

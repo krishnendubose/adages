@@ -8,7 +8,7 @@ public class CMDBTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int id =4 ;
-		CMDBService cmdbService = CMDBService.getCMDBService();
+		CMDBService cmdbService = null;//CMDBService.getCMDBService();
 		System.out.println("All deployment details:- \n" + cmdbService.getAllDeploymentDetails());
 		
 		System.out.println("Get deployment details for id="+ id +" :- \n" + cmdbService.getDeploymentDetails(id));
@@ -24,7 +24,7 @@ public class CMDBTest {
 		cmdb.setDeploymentDate("01_03_2018");
 		cmdb.setDeploymentStatus("Failure");
 		cmdb.setId(6);
-		System.out.println("Adding deployment data:- \n" + cmdbService.insertDeploymentDetails(cmdb));
+		//System.out.println("Adding deployment data:- \n" + cmdbService.insertDeploymentDetails(cmdb));
 		System.out.println("After addition deployment details:- \n" + cmdbService.getAllDeploymentDetails());
 	}
 

@@ -1,6 +1,6 @@
 package cmdb.converter;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cmdb.bean.CMDB;
 import cmdb.bean.CMDBList;
@@ -21,12 +21,23 @@ public class Converter {
 
 		String json = "If you see this, there's a problem.";
 		try {
-			//json = new ObjectMapper().writeValueAsString(cmdbList.getCmdbList().toArray());
+			
 			json = new ObjectMapper().writeValueAsString(cmdbList);
 		}
 		catch(Exception e) { }
 		return json;
-	}	
+	}
+	
+	public static String toJson(String msg){
+
+		String json = "If you see this, there's a problem.";
+		try {
+			
+			json = new ObjectMapper().writeValueAsString(msg);
+		}
+		catch(Exception e) { }
+		return json;
+	}
 
 
 }
