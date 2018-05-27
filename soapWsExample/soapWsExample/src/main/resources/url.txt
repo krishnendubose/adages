@@ -1,2 +1,5 @@
 http://localhost:10000/helloMsg?xsd=1 --> xsd link 
 http://localhost:10000/helloMsg?wsdl --> wsdl link
+http://localhost:8080/soapWsExample/helloMsg?wsdl
+
+wsimport -p ws.soap.client -keep http://localhost:8080/soapWsExample/helloMsg?wsdl
