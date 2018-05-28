@@ -19,7 +19,14 @@ public class HelloService {
 	
 	@WebMethod    
 	public String sayHelloWorld(){
-		
+		/*
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 		return "Hello, this is the sample msg from SOAP service method sayHello";
 	}
 	
