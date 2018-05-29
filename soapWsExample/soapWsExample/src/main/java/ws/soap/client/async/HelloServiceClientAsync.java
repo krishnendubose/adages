@@ -3,12 +3,15 @@ package ws.soap.client.async;
 import javax.xml.ws.AsyncHandler;
 import javax.xml.ws.Response;
 
+import ws.soap.client.handler.HelloServiceClientHandlerResolver;
+
 public class HelloServiceClientAsync {
 
 	public static void main(String[] args) {
 		HelloServiceService service = new HelloServiceService();
+		service.setHandlerResolver(new HelloServiceClientHandlerResolver());
 		HelloService port = service.getHelloServicePort();
-		port.sayHelloWorldAsync(new MyHandler());
+		//port.sayHelloWorldAsync(new MyHandler());
 		port.sayHelloAsync("Server", new MyHandler1());
 		try{
 			System.out.println("Main Thread name:- "   + Thread.currentThread().getName());
