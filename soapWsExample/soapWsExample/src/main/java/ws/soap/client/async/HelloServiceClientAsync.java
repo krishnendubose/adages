@@ -24,7 +24,6 @@ public class HelloServiceClientAsync {
 	 */
 	static class MyHandler implements AsyncHandler<SayHelloWorldResponse>{
 
-		@Override
 		public void handleResponse(Response<SayHelloWorldResponse> arg0) {
 			System.out.println("Within MyHandler class's handleResponse() method, Thread name:- " + Thread.currentThread().getName());
 			try{
