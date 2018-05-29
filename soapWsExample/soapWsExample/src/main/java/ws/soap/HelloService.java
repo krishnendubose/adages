@@ -27,7 +27,16 @@ public class HelloService {
 			e.printStackTrace();
 		}
 		*/
+		System.out.println("Within sayHelloWorld()");
 		return "Hello, this is the sample msg from SOAP service method sayHello";
+	}
+	
+	@WebMethod
+	public String sayHelloWorld(String msg){
+		System.out.println("Within sayHelloWorld("+ msg +")");
+		return "Hello " + msg;
+		
+		
 	}
 	
 
