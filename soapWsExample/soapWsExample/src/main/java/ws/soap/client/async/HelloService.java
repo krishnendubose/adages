@@ -28,6 +28,49 @@ public interface HelloService {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns javax.xml.ws.Response<ws.soap.client.async.SayHelloResponse>
+     */
+    @WebMethod(operationName = "sayHello")
+    @RequestWrapper(localName = "sayHello", targetNamespace = "http://soap.ws/", className = "ws.soap.client.async.SayHello")
+    @ResponseWrapper(localName = "sayHelloResponse", targetNamespace = "http://soap.ws/", className = "ws.soap.client.async.SayHelloResponse")
+    public Response<SayHelloResponse> sayHelloAsync(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @param asyncHandler
+     * @return
+     *     returns java.util.concurrent.Future<? extends java.lang.Object>
+     */
+    @WebMethod(operationName = "sayHello")
+    @RequestWrapper(localName = "sayHello", targetNamespace = "http://soap.ws/", className = "ws.soap.client.async.SayHello")
+    @ResponseWrapper(localName = "sayHelloResponse", targetNamespace = "http://soap.ws/", className = "ws.soap.client.async.SayHelloResponse")
+    public Future<?> sayHelloAsync(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "asyncHandler", targetNamespace = "")
+        AsyncHandler<SayHelloResponse> asyncHandler);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "sayHello", targetNamespace = "http://soap.ws/", className = "ws.soap.client.async.SayHello")
+    @ResponseWrapper(localName = "sayHelloResponse", targetNamespace = "http://soap.ws/", className = "ws.soap.client.async.SayHelloResponse")
+    public String sayHello(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
      * @return
      *     returns javax.xml.ws.Response<ws.soap.client.async.SayHelloWorldResponse>
      */

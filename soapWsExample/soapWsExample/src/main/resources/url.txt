@@ -5,3 +5,4 @@ http://localhost:8080/soapWsExample/helloMsg?wsdl
 wsimport -p ws.soap.client -keep http://localhost:8080/soapWsExample/helloMsg?wsdl
 
 wsimport -p ws.soap.client.async -keep http://localhost:8080/soapWsExample/helloMsg?wsdl -b customAsync.xml
+wsgen -keep -cp . ws.soap.HelloService --> Generate msg wrapper classes

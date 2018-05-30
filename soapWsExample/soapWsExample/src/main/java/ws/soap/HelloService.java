@@ -16,28 +16,20 @@ public class HelloService {
 	 *
 	 * @return
 	 */
-	
+
 	@WebMethod    
 	public String sayHelloWorld(){
-		/*
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
 		System.out.println("Within sayHelloWorld()");
 		return "Hello, this is the sample msg from SOAP service method sayHello";
 	}
-	
+
 	@WebMethod
-	public String sayHelloWorld(String msg){
+	public String sayHello(String msg){
 		System.out.println("Within sayHelloWorld("+ msg +")");
 		return "Hello " + msg;
-		
-		
+
+
 	}
-	
+
 
 }

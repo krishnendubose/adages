@@ -11,7 +11,6 @@ import javax.xml.ws.handler.PortInfo;
 public class HelloServiceClientHandlerResolver implements HandlerResolver {
 	public static final String LOCAL_PART_NAME = "HelloServiceService";
 
-	@Override
 	public List<Handler> getHandlerChain(PortInfo portInfo) {
 		List<Handler> handlerChain = new ArrayList<Handler>();
 		QName serviceQName = portInfo.getServiceName();

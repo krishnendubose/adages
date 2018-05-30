@@ -12,19 +12,16 @@ import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 public class HelloServiceClientSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
-	@Override
 	public void close(MessageContext arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public boolean handleFault(SOAPMessageContext arg0) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public boolean handleMessage(SOAPMessageContext mctx) {
 		// TODO Auto-generated method stub
 		Boolean outbound = (Boolean) mctx.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
@@ -54,7 +51,6 @@ public class HelloServiceClientSoapHandler implements SOAPHandler<SOAPMessageCon
 		return true;
 	}
 
-	@Override
 	public Set<QName> getHeaders() {
 		// TODO Auto-generated method stub
 		return null;

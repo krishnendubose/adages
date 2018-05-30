@@ -24,7 +24,9 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _SayHelloResponse_QNAME = new QName("http://soap.ws/", "sayHelloResponse");
     private final static QName _SayHelloWorld_QNAME = new QName("http://soap.ws/", "sayHelloWorld");
+    private final static QName _SayHello_QNAME = new QName("http://soap.ws/", "sayHello");
     private final static QName _SayHelloWorldResponse_QNAME = new QName("http://soap.ws/", "sayHelloWorldResponse");
 
     /**
@@ -32,6 +34,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link SayHello }
+     * 
+     */
+    public SayHello createSayHello() {
+        return new SayHello();
     }
 
     /**
@@ -51,12 +61,38 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SayHelloResponse }
+     * 
+     */
+    public SayHelloResponse createSayHelloResponse() {
+        return new SayHelloResponse();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SayHelloResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://soap.ws/", name = "sayHelloResponse")
+    public JAXBElement<SayHelloResponse> createSayHelloResponse(SayHelloResponse value) {
+        return new JAXBElement<SayHelloResponse>(_SayHelloResponse_QNAME, SayHelloResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SayHelloWorld }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://soap.ws/", name = "sayHelloWorld")
     public JAXBElement<SayHelloWorld> createSayHelloWorld(SayHelloWorld value) {
         return new JAXBElement<SayHelloWorld>(_SayHelloWorld_QNAME, SayHelloWorld.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SayHello }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://soap.ws/", name = "sayHello")
+    public JAXBElement<SayHello> createSayHello(SayHello value) {
+        return new JAXBElement<SayHello>(_SayHello_QNAME, SayHello.class, null, value);
     }
 
     /**
