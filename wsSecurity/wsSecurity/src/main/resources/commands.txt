@@ -1,0 +1,16 @@
+keytool -genkeypair -alias test_cert -keyalg RSA -keystore test.jks
+
+passwd - abcdef
+
+******HSTS header*****
+keytool -list -v -keystore test.jks
+
+https://localhost:8443/wsSecurity/index.jsp
+
+
+
+	<Connector SSLEnabled="true" clientAuth="false"
+		keystoreFile="/home/krishnendu/Documents/Development/projects/adages/wsSecurity/wsSecurity/src/main/resources/test.jks"
+		keystorePass="abcdef" maxThreads="200" port="8443"
+		protocol="org.apache.coyote.http11.Http11NioProtocol" scheme="https"
+		secure="true" sslProtocol="TLS" />
