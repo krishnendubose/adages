@@ -1,0 +1,50 @@
+cmdbWebApp:-
+======================
+
+cmdb bean Structure:-
+
+public int id;
+public String artifactName;
+public String artifactVersion;
+public String deployedBy;
+public String deploymentDate;
+public String deploymentStatus;
+
+
+===================
+
+
+CMDBService:-
+===================
+
+add
+get
+update
+delete
+
+CMDBDao
+===================
+add
+get
+update
+delete
+
+CMDBDaoImpl:-
+=====================
+add
+get
+update
+delete
+
+
+CMDBView:-
+======================
+
+
+
+CMDBAuth:-
+=============
+**LDAP integration
+**DB integration
+
+
